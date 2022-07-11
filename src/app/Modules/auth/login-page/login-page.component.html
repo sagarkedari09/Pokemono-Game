@@ -1,0 +1,37 @@
+<main class="main-container">
+  <section class="pokemon-picture">
+    <img
+      src="../assets/pokemon-wallpaper.webp"
+      alt=""
+      class="pokemon-wallpaper"
+    />
+  </section>
+  <section class="login-section">
+    <h2>Login</h2>
+    <form
+      [formGroup]="loginForm"
+      (ngSubmit)="onSubmitClick(loginForm)"
+      class="login-form"
+    >
+      <app-input
+        type="text"
+        placeholder="enter your email"
+        formControlName="email"
+      ></app-input>
+      <span *ngIf="loginForm.get('email')!.hasError('email')" class="message"
+        >*invalid email</span
+      >
+      <app-input
+        formControlName="password"
+        type="password"
+        placeholder="enter your password"
+      ></app-input>
+      <span
+        *ngIf="loginForm.get('password')!.hasError('minlength')"
+        class="message"
+        >*password is too short</span
+      >
+      <app-btn [loginForm]="loginForm">Login</app-btn>
+    </form>
+  </section>
+</main>

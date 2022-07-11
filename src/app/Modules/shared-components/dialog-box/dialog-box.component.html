@@ -1,0 +1,13 @@
+<!-- <main class="container">
+  <div class="name">Name: <app-input></app-input></div>
+  <div class="level">Level: <app-input></app-input></div>
+  <div class="type">Type: <app-input></app-input></div>
+  <app-btn>Save</app-btn>  
+</main> -->
+<form [formGroup]="form" class="popup" (ngSubmit)="popUpFormData(form)">
+  <app-input placeholder="bc" type="text" formControlName="name"></app-input>
+  <app-input placeholder="Level" type="text" formControlName="level"></app-input>
+  <app-input placeholder="Type" type="text" formControlName="type"></app-input>
+  <button type="submit">Submit</button>
+</form>
+ 

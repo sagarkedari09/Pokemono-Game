@@ -1,0 +1,140 @@
+<header class="header">
+  <h2 class="heading">Pokemon Admin</h2>
+  <app-btn class="logout-btn" (click)="gotoLogin()"> Logout</app-btn>
+</header>
+<div class="main">
+  <app-btn class="add-btn" mat-raised-button (click)="addButtonClicked()">
+    Add
+  </app-btn>
+</div>
+<div *ngIf="isPopUpCliked" class="pop-up-container">
+  <form [formGroup]="form" class="pop-up" (ngSubmit)="popupFormData(form)">
+    <app-input
+      placeholder="Name"
+      type="text"
+      formControlName="name"
+    ></app-input>
+    <app-input
+      placeholder="Level"
+      type="text"
+      formControlName="level"
+    ></app-input>
+    <select
+      [(ngModel)]="value"
+      formControlName="type"
+      placeholder="select type"
+    >
+      <option value="1">water</option>
+      <option value="2">fire</option>
+      <option value="3">steel</option>
+      <option value="4">leaf</option>
+    </select>
+    <button type="submit">Submit</button>
+  </form>
+</div>
+
+<div class="table-section">
+  <table mat-table [dataSource]="pokemons">
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef>Name</th>
+      <td mat-cell *matCellDef="let pokemon">{{ pokemon.name }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="type">
+      <th mat-header-cell *matHeaderCellDef>Type</th>
+      <td mat-cell *matCellDef="let pokemon">{{ pokemon.type }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="level">
+      <th mat-header-cell *matHeaderCellDef>Level</th>
+      <td mat-cell *matCellDef="let pokemon">{{ pokemon.level }}</td>
+    </ng-container>
+    <ng-container matColumnDef="createdOn">
+      <th mat-header-cell *matHeaderCellDef>createdOn</th>
+      <td mat-cell *matCellDef="let pokemon">{{ pokemon.createdOn }}</td>
+    </ng-container>
+    <ng-container matColumnDef="updatedOn">
+      <th mat-header-cell *matHeaderCellDef>updatedOn</th>
+      <td mat-cell *matCellDef="let pokemon">{{ pokemon.updatedOn }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="edit">
+      <!-- <mat-header-cell *matHeaderCellDef mat-sort-header> Edit </mat-header-cell> -->
+      <th mat-header-cell *matHeaderCellDef>edit</th>
+      <td mat-cell *matCellDef="let element">
+        <button
+          mat-icon-button
+          class="iconbutton"
+          (click)="editButtonClicked(element)"
+        >
+          <mat-icon class="edit-icon">edit</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="delete">
+      <!-- <mat-header-cell *matHeaderCellDef mat-sort-header> Delete </mat-header-cell> -->
+      <th mat-header-cell *matHeaderCellDef>delete</th>
+      <td mat-cell *matCellDef="let element">
+        <button
+          mat-icon-button
+          class="iconbutton"
+          (click)="deletePoke(element.id)"
+        >
+          <mat-icon class="delete-icon">delete</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+    <tr mat-row *matRowDef="let myRowData; columns: columnsToDisplay"></tr>
+  </table>
+
+  <!-- <table mat-table [dataSource]="pokemons" class="mat-elevation-z8 table">
+                    <ng-container matColumnDef="name">
+                              <th mat-header-cell *matHeaderCellDef>Name</th>
+                              <td mat-cell *matCellDef="let element">{{element.name}}</td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="level">
+                              <th mat-header-cell *matHeaderCellDef>Level</th>
+                              <td mat-cell *matCellDef="let element">{{ element.level }}</td>
+                    </ng-container>
+                    <ng-container matColumnDef="type">
+                              <th mat-header-cell *matHeaderCellDef>Type</th>
+                              <td mat-cell *matCellDef="let element">{{element.type}}</td>
+                    </ng-container>
+>                    <ng-container matColumnDef="data created">
+                              <th mat-header-cell *matHeaderCellDef>Data Created on</th>
+                              <td mat-cell *matCellDef="let element">{{ element.createdOn }}</td>
+                    </ng-container>
+                    <ng-container matColumnDef="data updated">
+                              <th mat-header-cell *matHeaderCellDef>Data Updated On</th>
+                              <td mat-cell *matCellDef="let element">{{ element.updatedOn }}</td>
+                    </ng-container>
+                    <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+                    <tr mat-row *matRowDef="let myRowData; columns: columnsToDisplay"></tr>
+          </table> -->
+  <!-- <table class="table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Level</th>
+        <th>Type</th>
+        <th>Date Created</th>
+        <th>Date Updated</th>
+      </tr>
+    </thead>
+
+    <tbody>
+          <ng-container *ngFor="let ele of pokemons">
+      <tr>
+        <td>{{ pokemons[0].name}}</td>
+        <td>{{ pokemons[0].level }}</td>
+        <td>{{ pokemons[0].type }}</td>
+        <td>{{ pokemons[0].createdOn }}</td>
+        <td>{{ pokemons[0].updatedOn }}</td>
+      </tr>
+</ng-container>
+    </tbody>
+    
+  </table> -->
+</div>
